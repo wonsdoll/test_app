@@ -16,7 +16,7 @@ genre = st.radio(
     ],
 )
 initial_added = True
-if genre == "출제자":
+if genre == "도전자":
     initial = "지금부터 스무고개를 할거야. 너는 출제자고, 스무고개를 진행할 단어를 생각해줘."
 else:
     initial = "지금부터 스무고개를 할거야. 너는 도전자고, 20번 내에 내가 생각한 단어를 맞춰봐. 질문을 할때마다 몇 번째 질문인지 적어줘. 정답이야 라고 말하면 대화를 끝내줘"
@@ -42,7 +42,7 @@ else:
         st.session_state.messages.append({"role": "system", "content": initial})
         initial_added = True
 
-    if genre == "출제자":
+    if genre == "도전자":
          with st.chat_message("assistant"):
              st.markdown("답을 생각했습니다. 질문을 해주세요")
 
@@ -51,7 +51,7 @@ else:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-    if genre == "도전자" and st.session_state.initial_questioned == False :
+    if genre == "출제자" and st.session_state.initial_questioned == False :
         stream = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
